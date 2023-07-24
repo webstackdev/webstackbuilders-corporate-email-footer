@@ -1,0 +1,87 @@
+<table style="border:0;font-size:12pt" cellspacing="0" cellpadding="0" role="presentation">
+  <tbody>
+    <tr>
+      <td style="font-size:10pt">
+        &nbsp;
+      </td>
+    </tr>
+
+    <tr>
+      <td style="color:#001a39;width:80px;vertical-align:top">
+        <strong>Phone:</strong>
+      </td>
+      <td  style="width:240px;vertical-align:top">
+        <a style="color:#19304c;text-decoration:none" href="tel:{{ user.phoneTollFreeCallable }}">
+          {{ companyData.phoneTollFree }}
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="color:#001a39;width:80px;vertical-align:top">
+        &nbsp;
+      </td>
+      <td  style="width:240px;vertical-align:top">
+        <a style="color:#19304c;text-decoration:none" href="tel:{{ user.phoneLocalCallable }}">
+          {{ companyData.phoneLocal }}
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="font-size:9pt">
+        &nbsp;
+      </td>
+    </tr>
+
+    <tr>
+      <td style="color:#001a39;width:80px;vertical-align:top">
+        <strong>Email:</strong>
+      </td>
+      <td  style="width:240px;vertical-align:top">
+        <a style="color:#19304c;text-decoration:none" href="mailto:{{ user.email }}">
+          {{ user.email }}
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="font-size: 9pt">
+        &nbsp;
+      </td>
+    </tr>
+
+    <tr>
+      <td style="color:#001a39;width:80px;vertical-align:top">
+        <strong>Website:</strong>
+      </td>
+      <td  style="width:240px;vertical-align:top">
+        <a style="color:#19304c;text-decoration:none" href="https://{{ companyData.website }}">
+          {{ companyData.website }}
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="font-size: 9pt">
+        &nbsp;
+      </td>
+    </tr>
+
+    <tr>
+      <td style="color:#001a39;width:80px;vertical-align:top">
+        <strong>Address:</strong>
+      </td>
+      <td  style="color:#19304c;width:240px;vertical-align:top">
+        {{ companyData.streetAddress }}<br>
+        {{ companyData.city }}, {{ companyData.stateAbbr }} {{ companyData.index }}
+      </td>
+    </tr>
+
+    <tr>
+      <td style="font-size:10pt">
+        &nbsp;
+      </td>
+    </tr>
+  </tbody>
+</table>

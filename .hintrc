@@ -1,0 +1,9 @@
+{
+    "connector": {
+        "name": "local"
+    },
+    "formatters": ["stylish"],
+    "parsers": ["html"],
+    "hints": {},
+    "hintsTimeout": 120000
+}

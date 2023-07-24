@@ -1,0 +1,23 @@
+<style type="text/css">
+  @media (min-width:20px)
+  {
+    /* we want to use the full device width for mobiles */
+    table[class="container"] {width: 100%;}
+    table[class="table-left"] {width: 100%;}
+    /* the right table should be fluid */
+    table[class="table-right"] {width: 100%;}
+  }
+
+  @media (min-width:480px)
+  {
+    /* we want 50:50 tables if the device-width is >= 480px */
+    table[class="table-left"] {width: 50%;}
+    table[class="table-right"] {width: 50%;}
+  }
+
+  @media (min-width:600px)
+  {
+    /* the container table should not extend 600px */
+    table[class="container"] {width: 640px;}
+  }
+</style>

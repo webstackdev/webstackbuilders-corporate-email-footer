@@ -1,0 +1,77 @@
+---
+layout: layout.njk
+pagination:
+    data: userData
+    size: 1
+    alias: user
+permalink: "{{ user.userName | slugify }}.html"
+---
+<div align="left" style="font-family:'Arial',sans-serif;margin-top:0pt">
+  <table id="bgtable" style="border:0;height:100%;width:100%" cellpadding="0" cellspacing="0"  role="presentation">
+    <tr>
+      <td align="center" style="vertical-align:top">
+        <!-- container 600px -->
+        <table class="container" style="border:0;width:640" cellpadding="0" cellspacing="0">
+          <tr>
+            <td>
+
+              <!--[if mso]>
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+              <td valign="top" width="50%">
+              <![endif]-->
+
+              <table class="table-left" align="left" cellpadding="0" cellspacing="0" style="border:0;display:inline-block;width:320">
+                <tr>
+                  <td>{% include 'images/logo.njk' %}</td>
+                </tr>
+              </table>
+
+              <!--[if mso]>
+              </td>
+              <td valign="top" width="50%">
+              <![endif]-->
+
+              <table class="table-right" align="left" cellpadding="0" cellspacing="0" style="border:0;display:inline-block;width:320">
+                <tr>
+                  <td>
+                    <strong style="color:#001a39;font-size:22pt">
+                      {{ user.userName }}<br>
+                      {{ user.title }}<br>
+                    </strong>
+                    {% include 'contact-info.njk' %}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    {% include 'social-media-links.njk' %}
+                  </td>
+                </tr>
+              </table>
+
+              <!--[if mso]>
+              </td>
+              </tr>
+              </table>
+              <![endif]-->
+
+              <table cellpadding="0" cellspacing="0" style="border:0;display:inline-block;font-size:11pt;width:100%">
+                <tr>
+                  <td style="font-size:6pt">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color: #9a9a9a;padding-top:15pxvertical-align:bottom" colspan="2">
+                    {% include 'disclaimer.njk' %}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
