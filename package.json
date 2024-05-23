@@ -26,6 +26,6 @@
     "gulp-htmlmin": "5.0.1",
     "hint": "7.1.11",
     "mkdirp": "3.0.1",
-    "rimraf": "5.0.1"
+    "rimraf": "5.0.7"
   }
 }
