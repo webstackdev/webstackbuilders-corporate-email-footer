@@ -2821,17 +2821,7 @@ braces@^3.0.2, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-browserslist@^4.21.5, browserslist@^4.22.2:
-  version "4.22.2"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.22.2.tgz#704c4943072bd81ea18997f3bd2180e89c77874b"
-  integrity sha512-0UgcrvQmBDvZHFGdYUehrCNIazki7/lUP3kkoi/r3YB2amZbFM9J43ZRkJTXBUZK4gmx56+Sqk9+Vs9mwZx9+A==
-  dependencies:
-    caniuse-lite "^1.0.30001565"
-    electron-to-chromium "^1.4.601"
-    node-releases "^2.0.14"
-    update-browserslist-db "^1.0.13"
-
-browserslist@^4.23.0:
+browserslist@^4.22.2, browserslist@^4.23.0:
   version "4.23.0"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.23.0.tgz#8f3acc2bbe73af7213399430890f86c63a5674ab"
   integrity sha512-QW8HiM1shhT2GuzkvklfjcKDiWFXHOeFCIA/huJPwHsslwcydgk7X+z2zXpEijP98UCY7HbubZt5J2Zgvf0CaQ==
@@ -2950,11 +2940,6 @@ camelcase@^6.2.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-6.3.0.tgz#5685b95eb209ac9c0c177467778c9c84df58ba9a"
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
-
-caniuse-lite@^1.0.30001565:
-  version "1.0.30001570"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001570.tgz#b4e5c1fa786f733ab78fc70f592df6b3f23244ca"
-  integrity sha512-+3e0ASu4sw1SWaoCtvPeyXp+5PsjigkSt8OXZbF9StH5pQWbxEjLAZE3n8Aup5udop1uRiKA7a4utUk/uoSpUw==
 
 caniuse-lite@^1.0.30001587:
   version "1.0.30001600"
@@ -3534,11 +3519,6 @@ ejs@^3.1.9:
   integrity sha512-UeJmFfOrAQS8OJWPZ4qtgHyWExa088/MtK5UEyoJGFH67cDEXkZSviOiKRCZ4Xij0zxI3JECgYs3oKx+AizQBA==
   dependencies:
     jake "^10.8.5"
-
-electron-to-chromium@^1.4.601:
-  version "1.4.614"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.614.tgz#2fe789d61fa09cb875569f37c309d0c2701f91c0"
-  integrity sha512-X4ze/9Sc3QWs6h92yerwqv7aB/uU8vCjZcrMjA8N9R1pjMFRe44dLsck5FzLilOYvcXuDn93B+bpGYyufc70gQ==
 
 electron-to-chromium@^1.4.668:
   version "1.4.715"
@@ -4316,10 +4296,10 @@ he@1.2.x:
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
-hint@7.1.11:
-  version "7.1.11"
-  resolved "https://registry.yarnpkg.com/hint/-/hint-7.1.11.tgz#1efc51a430a19c4eb3a2a0ddd71f8b4f5cc3a4d5"
-  integrity sha512-Z4+Bv5tNLbb6un0ScqHbDRTT5DpW1ttyftfuhDGncnkcachJjqhOqRjFqI9bfmqs5B4FgOT3Jn2vRC+GOHB3Ug==
+hint@7.1.12:
+  version "7.1.12"
+  resolved "https://registry.yarnpkg.com/hint/-/hint-7.1.12.tgz#9b51f70bbf7184e5c5a3a7e3afa9a756b4cd60af"
+  integrity sha512-y0oimnNJ2G2HVN0Q0aCikqECuTNK0vs9/Z/y6gtE94uYbikIuxzwOLXkiZTyvLlegnIDsjqYAZQjpio6dtxjcg==
   dependencies:
     "@hint/utils" "^7.0.23"
     "@hint/utils-debug" "^1.0.11"
@@ -4328,7 +4308,7 @@ hint@7.1.11:
     "@hint/utils-network" "^1.0.26"
     "@hint/utils-string" "^1.0.14"
     "@hint/utils-types" "^1.2.1"
-    browserslist "^4.21.5"
+    browserslist "^4.23.0"
     chalk "^4.1.2"
     eventemitter2 "^6.4.9"
     globby "^11.0.4"
