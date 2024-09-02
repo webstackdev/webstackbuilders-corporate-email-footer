@@ -24,7 +24,7 @@
     "gulp": "5.0.0",
     "gulp-htmllint": "0.0.19",
     "gulp-htmlmin": "5.0.1",
-    "hint": "7.1.12",
+    "hint": "7.1.13",
     "mkdirp": "3.0.1",
     "rimraf": "6.0.1"
   }
