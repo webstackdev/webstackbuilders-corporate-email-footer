@@ -2,12 +2,6 @@
   {
     "userName": "Kevin Brown",
     "title": "Software Engineer",
-    "email": "kevin@webstackbuilders.com",
-    "socialLinks": {
-      "linkedin": "https://www.linkedin.com/in/kevin-brown-developer/",
-      "x": "https://x.com/WebstackDev",
-      "mastodon": "https://k8s.social/@webstackdev",
-      "github": "https://github.com/webstackdev"
-    }
+    "email": "kevin@webstackbuilders.com"
   }
 ]
