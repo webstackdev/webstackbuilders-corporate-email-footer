@@ -8,12 +8,15 @@
   "private": true,
   "scripts": {
     "prebuild": "npx mkdirp .cache && npx mkdirp dist",
-    "build": "npm run clean && npm run prebuild && npm run compile && npm run minify",
+    "build": "npm run build:core && npm run test:image && npm run test:length",
+    "build:core": "npm run clean && npm run prebuild && npm run compile && npm run minify",
     "compile": "npx @11ty/eleventy",
     "clean": "npx rimraf .cache && npx rimraf dist",
+    "dev": "npm run build && npx @11ty/eleventy --serve",
     "lint": "npm run clean && npx mkdirp .cache && npm run compile && npx gulp lint",
     "minify": "npx gulp minify",
-    "serve": "npx @11ty/eleventy --serve"
+    "test:image": "npx gulp test:image",
+    "test:length": "npx gulp test:length"
   },
   "devDependencies": {
     "@11ty/eleventy": "3.1.2",
@@ -25,6 +28,7 @@
     "gulp-htmllint": "0.0.19",
     "gulp-htmlmin": "5.0.1",
     "hint": "7.1.13",
+    "is-base64": "^1.1.0",
     "mkdirp": "3.0.1",
     "rimraf": "6.0.1"
   }
