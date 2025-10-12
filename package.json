@@ -9,10 +9,11 @@
   "scripts": {
     "prebuild": "npx mkdirp .cache && npx mkdirp dist",
     "build": "npm run build:core && npm run test:image && npm run test:length",
-    "build:core": "npm run clean && npm run prebuild && npm run compile && npm run minify",
+    "build:core": "npm run generate:images && npm run clean && npm run prebuild && npm run compile && npm run minify",
     "compile": "npx @11ty/eleventy",
     "clean": "npx rimraf .cache && npx rimraf dist",
-    "dev": "npm run build && npx @11ty/eleventy --serve",
+    "dev": "npm run build && python3 -m http.server 8080 --directory dist",
+    "generate:images": "npx gulp generate:images",
     "lint": "npm run clean && npx mkdirp .cache && npm run compile && npx gulp lint",
     "minify": "npx gulp minify",
     "test:image": "npx gulp test:image",
@@ -28,6 +29,9 @@
     "gulp-htmllint": "0.0.19",
     "gulp-htmlmin": "5.0.1",
     "hint": "7.1.13",
+    "image-to-base64": "^2.2.0",
+    "imagemin": "^9.0.1",
+    "imagemin-pngquant": "^10.0.0",
     "is-base64": "^1.1.0",
     "mkdirp": "3.0.1",
     "rimraf": "6.0.1"

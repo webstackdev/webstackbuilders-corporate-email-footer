@@ -2,6 +2,16 @@
 
 This is a generator for creating two-column responsive, accessible, and minified HTML e-mail signatures from JSON data file. It will create one HTML file per user in the `dist` folder that can be uploaded through an e-mail client to your server.
 
+## Prerequisites
+
+**Linux machines** must have the following packages installed prior to running `npm install`:
+
+```bash
+sudo apt install libpng-dev libimagequant-dev
+```
+
+This is required for the PNG optimization functionality used in the image generation process.
+
 **Example:**
 
 ![Screenshot](src/_partials/images/screenshot.png)

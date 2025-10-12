@@ -7,6 +7,9 @@ import fs from 'fs'
 import path from 'path'
 import isBase64 from 'is-base64'
 import { execSync } from 'child_process'
+import imageToBase64 from 'image-to-base64'
+import imagemin from 'imagemin'
+import imageminPngquant from 'imagemin-pngquant'
 
 const htmlMinifierOptions = {
   collapseWhitespace: true,
@@ -39,48 +42,46 @@ gulp.task('lint', () => {
 })
 
 gulp.task('test:image', (done) => {
-  const imagesDir = 'src/_partials/images'
-  const imageFiles = fs.readdirSync(imagesDir).filter(file => file.endsWith('.njk'))
+  const imagesJsonPath = 'src/_data/images.json'
+  
+  if (!fs.existsSync(imagesJsonPath)) {
+    fancyLog(colors.red('[test:image] ') + colors.red('images.json file not found. Run generate:images first.'))
+    process.exitCode = 1
+    done()
+    return
+  }
 
-  fancyLog(colors.cyan('[test:image] ') + colors.white(`Testing ${imageFiles.length} image templates...`))
+  const imagesData = JSON.parse(fs.readFileSync(imagesJsonPath, 'utf8'))
+  const imageNames = Object.keys(imagesData)
+
+  fancyLog(colors.cyan('[test:image] ') + colors.white(`Testing ${imageNames.length} images from images.json...`))
 
   let allValid = true
 
-  imageFiles.forEach(file => {
-    const filePath = path.join(imagesDir, file)
-    const content = fs.readFileSync(filePath, 'utf8')
+  imageNames.forEach(imageName => {
+    const imageInfo = imagesData[imageName]
+    const dataUri = imageInfo.dataUri
 
-    // Extract src="" content using regex
-    const srcMatch = content.match(/src="([^"]+)"/)
+    if (dataUri && dataUri.startsWith('data:image/')) {
+      // Extract the base64 part after the comma
+      const base64Part = dataUri.split(',')[1]
 
-    if (srcMatch) {
-      const srcValue = srcMatch[1]
-
-      // Check if it's a base64 data URI
-      if (srcValue.startsWith('data:image/')) {
-        // Extract the base64 part after the comma
-        const base64Part = srcValue.split(',')[1]
-
-        if (base64Part && isBase64(base64Part)) {
-          fancyLog(colors.green('✓ ') + colors.white(file) + colors.gray(' - valid base64 image'))
-        } else {
-          fancyLog(colors.red('✗ ') + colors.white(file) + colors.red(' - invalid base64 encoding'))
-          allValid = false
-        }
+      if (base64Part && isBase64(base64Part)) {
+        fancyLog(colors.green('✓ ') + colors.white(`${imageName}.png`) + colors.gray(' - valid base64 image'))
       } else {
-        fancyLog(colors.yellow('? ') + colors.white(file) + colors.yellow(' - not a data URI'))
+        fancyLog(colors.red('✗ ') + colors.white(`${imageName}.png`) + colors.red(' - invalid base64 encoding'))
         allValid = false
       }
     } else {
-      fancyLog(colors.red('✗ ') + colors.white(file) + colors.red(' - no src attribute found'))
+      fancyLog(colors.red('✗ ') + colors.white(`${imageName}.png`) + colors.red(' - invalid data URI format'))
       allValid = false
     }
   })
 
   if (allValid) {
-    fancyLog(colors.green('[test:image] ') + colors.white('All image templates valid!'))
+    fancyLog(colors.green('[test:image] ') + colors.white('All images valid!'))
   } else {
-    fancyLog(colors.red('[test:image] ') + colors.white('Some image templates have issues'))
+    fancyLog(colors.red('[test:image] ') + colors.white('Some images have issues'))
     process.exitCode = 1
   }
 
@@ -98,33 +99,33 @@ gulp.task('test:length', (done) => {
     execSync('npm run build:core', { stdio: 'inherit' })
 
     let allValid = true
-    
-    // Check image template files first
-    fancyLog(colors.cyan('[test:length] ') + colors.white('Checking image template character counts...'))
-    const imagesDir = 'src/_partials/images'
-    
-    if (fs.existsSync(imagesDir)) {
-      const imageFiles = fs.readdirSync(imagesDir).filter(file => file.endsWith('.njk'))
+
+    // Check image data from images.json
+    fancyLog(colors.cyan('[test:length] ') + colors.white('Checking image character counts...'))
+    const imagesJsonPath = 'src/_data/images.json'
+
+    if (fs.existsSync(imagesJsonPath)) {
+      const imagesData = JSON.parse(fs.readFileSync(imagesJsonPath, 'utf8'))
+      const imageNames = Object.keys(imagesData)
       let totalImageChars = 0
-      
-      imageFiles.forEach(file => {
-        const filePath = path.join(imagesDir, file)
-        const content = fs.readFileSync(filePath, 'utf8')
-        const charCount = content.length
+
+      imageNames.forEach(imageName => {
+        const imageInfo = imagesData[imageName]
+        const charCount = imageInfo.dataUri.length
+
         totalImageChars += charCount
-        
-        fancyLog(colors.blue('ℹ ') + colors.white(file) + colors.gray(` - ${charCount} characters`))
+        fancyLog(colors.blue('ℹ ') + colors.white(`${imageName}.png`) + colors.gray(` - ${charCount} characters`))
       })
-      
+
       // Check if total image size passes/fails against Gmail limit
       if (totalImageChars <= MAX_LENGTH) {
-        fancyLog(colors.green('✓ ') + colors.white(`Total image templates: ${totalImageChars} characters (within Gmail limit)`))
+        fancyLog(colors.green('✓ ') + colors.white(`Total images: ${totalImageChars} characters (within Gmail limit)`))
       } else {
-        fancyLog(colors.red('✗ ') + colors.white(`Total image templates: ${totalImageChars} characters (exceeds Gmail limit of ${MAX_LENGTH})`))
+        fancyLog(colors.red('✗ ') + colors.white(`Total images: ${totalImageChars} characters (exceeds Gmail limit of ${MAX_LENGTH})`))
         allValid = false
       }
-      
-      fancyLog(colors.cyan('[test:length] ') + colors.white(`Image templates checked: ${imageFiles.length} file(s)`))
+
+      fancyLog(colors.cyan('[test:length] ') + colors.white(`Images checked: ${imageNames.length} file(s)`))
     }
 
     fancyLog(colors.cyan('[test:length] ') + colors.white('Checking character counts in dist folder...'))
@@ -167,6 +168,68 @@ gulp.task('test:length', (done) => {
   } catch (error) {
     fancyLog(colors.red('[test:length] ') + colors.red('Build failed: ' + error.message))
     process.exitCode = 1
+  }
+
+  done()
+})
+
+gulp.task('generate:images', async (done) => {
+  const imagesDir = 'src/_data/images'
+  const outputFile = 'src/_data/images.json'
+
+  fancyLog(colors.cyan('[generate:images] ') + colors.white('Optimizing and converting PNG images to base64...'))
+
+  try {
+    const imageFiles = fs.readdirSync(imagesDir).filter(file => file.endsWith('.png'))
+    const imagesData = {}
+
+    for (const file of imageFiles) {
+      const filePath = path.join(imagesDir, file)
+      const fileName = path.basename(file, '.png')
+
+      try {
+        // First optimize the PNG with imagemin and pngquant
+        fancyLog(colors.blue('⚙ ') + colors.white(file) + colors.gray(' - optimizing with pngquant...'))
+
+        const optimizedFiles = await imagemin([filePath], {
+          plugins: [
+            imageminPngquant({
+              quality: [0.05, 0.8], // Quality range for optimization
+              speed: 4 // Speed vs quality trade-off (1-10, where 10 is fastest)
+            })
+          ]
+        })
+
+        if (optimizedFiles.length === 0) {
+          throw new Error('No optimized files generated')
+        }
+
+        // Convert the optimized buffer to base64
+        const optimizedBuffer = optimizedFiles[0].data
+        const base64String = Buffer.from(optimizedBuffer).toString('base64')
+        const dataUri = `data:image/png;base64,${base64String}`
+
+        // Calculate size reduction
+        const originalSize = fs.statSync(filePath).size
+        const optimizedSize = optimizedBuffer.length
+        const reduction = ((originalSize - optimizedSize) / originalSize * 100).toFixed(1)
+
+        imagesData[fileName] = {
+          dataUri: dataUri,
+          alt: fileName === 'logo' ? 'logo image' : `${fileName} icon`
+        }
+
+        fancyLog(colors.green('✓ ') + colors.white(file) + colors.gray(` - optimized (${reduction}% smaller) and converted to base64 (${base64String.length} chars)`))
+      } catch (error) {
+        fancyLog(colors.red('✗ ') + colors.white(file) + colors.red(` - processing failed: ${error.message}`))
+      }
+    }
+
+    fs.writeFileSync(outputFile, JSON.stringify(imagesData, null, 2))
+    fancyLog(colors.green('[generate:images] ') + colors.white(`Generated ${outputFile} with ${Object.keys(imagesData).length} optimized images`))
+
+  } catch (error) {
+    fancyLog(colors.red('[generate:images] ') + colors.red('Failed: ' + error.message))
   }
 
   done()

@@ -29,9 +29,19 @@ permalink: "{{ user.userName | slugify }}.html"
               <table class="table-left" align="left" cellpadding="0" cellspacing="0" style="border:0;display:inline-block;width:320">
                 <tr>
                   <td>
-                    <a style="color:#19304c;text-decoration:none" href="https://{{ companyData.website }}">
-                      {% include 'images/logo.njk' %}
-                    </a>
+                    <table cellpadding="0" cellspacing="0" style="width:300px;height:300px;background-color:#001A39;border:0;">
+                      <tr>
+                        <td align="center" valign="middle" style="text-align:center;vertical-align:middle;padding:20px;">
+                          <a style="color:#19304c;text-decoration:none;display:block;text-align:center;" href="https://{{ companyData.website }}">
+                            <img style="border:0;display:block;margin:0 auto 15px auto;" alt="{{ images.logo.alt }}" src="{{ images.logo.dataUri }}">
+                          </a>
+                          <div style="color:white;font-family:Helvetica,Arial,sans-serif;font-size:24pt;text-align:center;line-height:1;font-weight:bold;">
+                            {{ companyData.companyName }}
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
                 </tr>
               </table>
 

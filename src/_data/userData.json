@@ -3,10 +3,11 @@
     "userName": "Kevin Brown",
     "title": "Software Engineer",
     "email": "kevin@webstackbuilders.com",
-    "linkedinLink": "https://www.linkedin.com/in/kevin-brown-developer/",
-    "twitterLink": "https://x.com/WebstackDev",
-    "mastodonLink": "https://k8s.social/@webstackdev",
-    "blueskyLink": "https://bsky.app/profile/webstackdev.bsky.social",
-    "githubLink": "https://github.com/webstackdev"
+    "socialLinks": {
+      "linkedin": "https://www.linkedin.com/in/kevin-brown-developer/",
+      "x": "https://x.com/WebstackDev",
+      "mastodon": "https://k8s.social/@webstackdev",
+      "github": "https://github.com/webstackdev"
+    }
   }
 ]

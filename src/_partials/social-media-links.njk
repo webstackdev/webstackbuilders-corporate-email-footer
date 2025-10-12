@@ -1,15 +1,5 @@
-<a href="{{ user.linkedinLink }}" style="text-decoration:none">
-  {% include 'images/linkedin-icon.njk' %}
+{%- for platform, url in user.socialLinks -%}
+<a href="{{ url }}" style="text-decoration:none">
+  <img style="border: 0" alt="{{ images[platform].alt }}" src="{{ images[platform].dataUri }}">
 </a>&nbsp;
-<a href="{{ user.twitterLink }}" style="text-decoration:none">
-  {% include 'images/x.njk' %}
-</a>&nbsp;
-<a href="{{ user.mastodonLink }}" style="text-decoration:none">
-  {% include 'images/mastodon-icon.njk' %}
-</a>&nbsp;
-<a href="{{ user.blueskyLink }}" style="text-decoration:none">
-  {% include 'images/bluesky-icon.njk' %}
-</a>&nbsp;
-<a href="{{ user.githubLink }}" style="text-decoration:none">
-  {% include 'images/github-icon.njk' %}
-</a>&nbsp;
+{%- endfor -%}
