@@ -8,24 +8,24 @@
   "private": true,
   "scripts": {
     "prebuild": "npx mkdirp .cache && npx mkdirp dist",
-    "build": "yarn clean && yarn prebuild && yarn compile && yarn minify",
+    "build": "npm run clean && npm run prebuild && npm run compile && npm run minify",
     "compile": "npx @11ty/eleventy",
     "clean": "npx rimraf .cache && npx rimraf dist",
-    "lint": "yarn run clean && npx mkdirp .cache && yarn compile && npx gulp lint",
+    "lint": "npm run clean && npx mkdirp .cache && npm run compile && npx gulp lint",
     "minify": "npx gulp minify",
     "serve": "npx @11ty/eleventy --serve"
   },
   "devDependencies": {
-    "@11ty/eleventy": "2.0.1",
-    "@babel/core": "7.22.9",
-    "@babel/preset-env": "7.22.9",
-    "@babel/register": "7.22.5",
-    "@types/gulp-htmlmin": "1.3.33",
-    "gulp": "4.0.2",
+    "@11ty/eleventy": "3.1.2",
+    "@babel/core": "7.28.4",
+    "@babel/preset-env": "7.28.3",
+    "@babel/register": "7.28.3",
+    "@types/gulp-htmlmin": "1.3.36",
+    "gulp": "5.0.1",
     "gulp-htmllint": "0.0.19",
     "gulp-htmlmin": "5.0.1",
-    "hint": "7.1.10",
+    "hint": "7.1.13",
     "mkdirp": "3.0.1",
-    "rimraf": "5.0.1"
+    "rimraf": "6.0.1"
   }
 }

@@ -4,8 +4,9 @@
     "title": "Software Engineer",
     "email": "kevin@webstackbuilders.com",
     "linkedinLink": "https://www.linkedin.com/in/kevin-brown-developer/",
-    "twitterLink": "https://twitter.com/WebstackDev",
-    "facebookLink": "https://www.facebook.com/profile.php?id=100022313823455",
+    "twitterLink": "https://x.com/WebstackDev",
+    "mastodonLink": "https://k8s.social/@webstackdev",
+    "blueskyLink": "https://bsky.app/profile/webstackdev.bsky.social",
     "githubLink": "https://github.com/webstackdev"
   }
 ]
