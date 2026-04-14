@@ -48,6 +48,7 @@ gulp.task('test:length', (done) => {
     execSync('npm run build:core', { stdio: 'inherit' })
 
     let allValid = true
+    let maxCharCount = 0
 
     fancyLog(colors.cyan('[test:length] ') + colors.white('Checking character counts in dist folder...'))
 
@@ -71,6 +72,8 @@ gulp.task('test:length', (done) => {
       const content = fs.readFileSync(filePath, 'utf8')
       const charCount = content.length
 
+      maxCharCount = Math.max(maxCharCount, charCount)
+
       if (charCount <= MAX_LENGTH) {
         fancyLog(colors.green('✓ ') + colors.white(file) + colors.gray(` - ${charCount} characters (within Gmail limit)`))
       } else {
@@ -80,7 +83,7 @@ gulp.task('test:length', (done) => {
     })
 
     if (allValid) {
-      fancyLog(colors.green('[test:length] ') + colors.white(`All ${distFiles.length} file(s) within Gmail character limit!`))
+      fancyLog(colors.green('[test:length] ') + colors.white(`All ${distFiles.length} file(s) within Gmail character limit (${maxCharCount}/${MAX_LENGTH})`))
     } else {
       fancyLog(colors.red('[test:length] ') + colors.white('Some files exceed the Gmail character limit'))
       process.exitCode = 1

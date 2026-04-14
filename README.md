@@ -1,5 +1,7 @@
 # Webstack Builders Corporate HTML Email Signature
 
+Important: open the built signature page in a web browser and copy the rendered signature from that page with `Ctrl+C`, then paste it into Google's signature/footer editor. Google does not accept raw HTML for signatures, so you must paste the rich text output from the browser instead.
+
 This is a generator for creating two-column responsive, accessible, and minified HTML e-mail signatures from JSON data file. It will create one HTML file per user in the `dist` folder that can be uploaded through an e-mail client to your server.
 
 ## Prerequisites
@@ -55,8 +57,10 @@ yarn build
 ## Run Development Server
 
 ```bash
-yarn serve
+npm run serve
 ```
+
+This builds the signatures and starts a local web server for the `dist` folder on port `8080`. Open the generated HTML file you want in your browser, select the rendered signature, and copy it into Google's footer box with `Ctrl+C`.
 
 ## Lint Output
 
